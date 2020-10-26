@@ -20,6 +20,20 @@ import java.util.function.Supplier;
 import static org.sandboxpowered.api.resources.ResourceConstants.*;
 
 public class OpenIndustry implements Addon {
+    public static final ResourceMaterial COPPER = ResourceConstants.material("copper");
+    public static final ResourceMaterial TIN = ResourceConstants.material("tin");
+    public static final ResourceMaterial LEAD = ResourceConstants.material("lead");
+    public static final ResourceMaterial BRONZE = ResourceConstants.material("bronze");
+    public static final ResourceMaterial STEEL = ResourceConstants.material("steel");
+    public static final ResourceMaterial SILVER = ResourceConstants.material("silver");
+    public static final ResourceMaterial IRIDIUM = ResourceConstants.material("iridium");
+    public static final ResourceType<Item> SMALL_DUST = ResourceConstants.type("small_dust");
+    public static final ResourceType<Item> PLATE = ResourceConstants.type("plate");
+    public static final ResourceType<Item> CASING = ResourceConstants.type("casing");
+    public static final ResourceType<Item> DENSE_PLATE = ResourceConstants.type("dense_plate");
+    public static final ResourceType<?>[] METAL = new ResourceType<?>[]{
+            INGOT, DUST, SMALL_DUST, NUGGET, PLATE, DENSE_PLATE, CASING, ORE, BLOCK
+    };
     public static MachineReference<MachineIronFurnace> IRON_FURNACE;
     public static MachineReference<MachineExtractor> EXTRACTOR;
     public static MachineReference<MachineCompressor> COMPRESSOR;
@@ -53,25 +67,6 @@ public class OpenIndustry implements Addon {
         api.getLog().info("Loading Example Addon");
     }
 
-    public static final ResourceMaterial COPPER = ResourceConstants.material("copper");
-    public static final ResourceMaterial TIN = ResourceConstants.material("tin");
-    public static final ResourceMaterial LEAD = ResourceConstants.material("lead");
-    public static final ResourceMaterial BRONZE = ResourceConstants.material("bronze");
-    public static final ResourceMaterial STEEL = ResourceConstants.material("steel");
-    public static final ResourceMaterial SILVER = ResourceConstants.material("silver");
-    public static final ResourceMaterial IRIDIUM = ResourceConstants.material("iridium");
-    public static final ResourceType<Item> SMALL_DUST = ResourceConstants.type("small_dust");
-    public static final ResourceType<Item> PLATE = ResourceConstants.type("plate");
-    public static final ResourceType<Item> CASING = ResourceConstants.type("casing");
-    public static final ResourceType<Item> DENSE_PLATE = ResourceConstants.type("dense_plate");
-
-    public static final ResourceType<Item>[] ALL = new ResourceType[]{
-            INGOT, DUST, SMALL_DUST, NUGGET, PLATE, DENSE_PLATE, GEM,CASING
-    };
-    public static final ResourceType<?>[] METAL = new ResourceType<?>[]{
-            INGOT, DUST, SMALL_DUST, NUGGET, PLATE, DENSE_PLATE, CASING, ORE, BLOCK
-    };
-
     @Override
     public void register(SandboxAPI api, Registrar registrar) {
         api.getLog().info("Registering Content");
@@ -84,8 +79,8 @@ public class OpenIndustry implements Addon {
             service.add(BRONZE, METAL);
             service.add(STEEL, METAL);
             service.add(SILVER, METAL);
-            service.add(GOLD, PLATE, DENSE_PLATE, DUST, SMALL_DUST,CASING);
-            service.add(IRON, PLATE, DENSE_PLATE, DUST, SMALL_DUST,CASING);
+            service.add(GOLD, PLATE, DENSE_PLATE, DUST, SMALL_DUST, CASING);
+            service.add(IRON, PLATE, DENSE_PLATE, DUST, SMALL_DUST, CASING);
             service.add(LAPIS, PLATE, DENSE_PLATE, DUST, SMALL_DUST);
             service.add(OBSIDIAN, DUST, PLATE, DENSE_PLATE, SMALL_DUST);
             service.add(COAL, DUST);
