@@ -1,0 +1,12 @@
+id="openindustry"
+version="1.0.0"
+title="Open Industrialization"
+description="""
+Open-Source alternative to IndustrialCraft2
+"""
+entrypoint="org.sandboxpowered.openindustry.OpenIndustry"
+authors = [
+    "SandboxPowered",
+]
+url = ""
+side = "COMMON"

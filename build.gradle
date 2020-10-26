@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group 'org.sandboxpowered'
+version '1.0.0'
+
+repositories {
+    maven { url 'https://nexus.sandboxpowered.org/repository/maven-public/' }
+}
+
+dependencies {
+    compileOnly 'org.jetbrains:annotations:19.0.0'
+
+    implementation platform('org.sandboxpowered.api:api:coded-tweaks-SNAPSHOT')
+
+    implementation('org.sandboxpowered.api:base')
+    implementation('org.sandboxpowered.api:rendering')
+    implementation('org.sandboxpowered.api:resources')
+}
