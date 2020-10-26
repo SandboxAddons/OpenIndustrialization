@@ -1,0 +1,20 @@
+{
+  "block.openindustry.electric_furnace": "Electric Furnace",
+  "block.openindustry.compressor": "Compresor",
+  "block.openindustry.extractor": "Extractor",
+  "block.openindustry.generator": "Generator",
+  "block.openindustry.mass_fabricator": "Mass Fabricator",
+  "block.openindustry.geo_generator": "Geothermal Generator",
+  "block.openindustry.macerator": "Macerator",
+  "block.openindustry.iron_furnace": "Iron Furnace",
+  "block.openindustry.recycler": "Recycler",
+  
+  "item.openindustry.circuit": "Circuit",
+  "item.openindustry.adv_circuit": "Advanced Circuit",
+  "item.openindustry.alloy": "Alloy",
+  "item.openindustry.carbon_fibre": "Carbon Fibre",
+  "item.openindustry.carbon_mesh": "Carbon Mesh",
+  "item.openindustry.carbon_plate": "Carbon Plate",
+  "item.openindustry.scrap": "Scrap",
+  "item.openindustry.scrap_box": "Scrapbox"
+}
