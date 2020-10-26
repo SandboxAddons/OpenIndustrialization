@@ -12,7 +12,7 @@ repositories {
 dependencies {
     compileOnly 'org.jetbrains:annotations:19.0.0'
 
-    implementation platform('org.sandboxpowered.api:api:coded-tweaks-SNAPSHOT')
+    implementation platform("org.sandboxpowered.api:api:${project.sandbox_version}")
 
     implementation('org.sandboxpowered.api:base')
     implementation('org.sandboxpowered.api:rendering')
