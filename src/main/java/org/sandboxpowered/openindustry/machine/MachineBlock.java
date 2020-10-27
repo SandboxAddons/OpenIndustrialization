@@ -51,11 +51,6 @@ public class MachineBlock<L extends BaseMachineLogic> extends BaseBlock {
     }
 
     @Override
-    public boolean hasBlockEntity() {
-        return true;
-    }
-
-    @Override
     public @Nullable BlockEntity createBlockEntity(WorldReader reader) {
         return logicSupplier.get();
     }

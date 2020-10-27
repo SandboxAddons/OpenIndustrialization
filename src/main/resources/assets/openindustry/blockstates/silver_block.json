@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "openindustry:block/world/silver_block"
+    }
+  }
+}

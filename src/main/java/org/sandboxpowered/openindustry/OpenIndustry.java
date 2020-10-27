@@ -2,6 +2,7 @@ package org.sandboxpowered.openindustry;
 
 import org.sandboxpowered.api.SandboxAPI;
 import org.sandboxpowered.api.addon.Addon;
+import org.sandboxpowered.api.block.BaseBlock;
 import org.sandboxpowered.api.block.Block;
 import org.sandboxpowered.api.block.Material;
 import org.sandboxpowered.api.block.entity.BlockEntity;
@@ -34,6 +35,9 @@ public class OpenIndustry implements Addon {
     public static final ResourceType<?>[] METAL = new ResourceType<?>[]{
             INGOT, DUST, SMALL_DUST, NUGGET, PLATE, DENSE_PLATE, CASING, ORE, BLOCK
     };
+    public static final ResourceType<?>[] METAL_NO_ORE = new ResourceType<?>[]{
+            INGOT, DUST, SMALL_DUST, NUGGET, PLATE, DENSE_PLATE, CASING, BLOCK
+    };
     public static MachineReference<MachineIronFurnace> IRON_FURNACE;
     public static MachineReference<MachineExtractor> EXTRACTOR;
     public static MachineReference<MachineCompressor> COMPRESSOR;
@@ -49,7 +53,7 @@ public class OpenIndustry implements Addon {
     }
 
     public static <L extends BaseMachineLogic> MachineReference<L> registerMachine(Registrar registrar, String name, boolean hasRotation, Supplier<L> logic) {
-        MachineBlock<L> machine = new MachineBlock<>(Block.Settings.builder(Material.METAL).setStrength(5, 6).build(), hasRotation, logic);
+        MachineBlock<L> machine = new MachineBlock<>(Block.Settings.builder(Material.METAL).hasBlockEntity().setStrength(5, 6).build(), hasRotation, logic);
         registrar.register(name, machine);
         BlockEntity.Type<L> type = BlockEntity.Type.of(logic, machine);
         registrar.register(name, type);
@@ -60,6 +64,12 @@ public class OpenIndustry implements Addon {
 
     public static void registerSimpleItem(Registrar registrar, String name) {
         registrar.register(name, new BaseItem(new Item.Settings()));
+    }
+
+    public static void registerSimpleBlock(Registrar registrar, String name, Material material) {
+        BaseBlock baseBlock = new BaseBlock(Block.Settings.builder(material).setStrength(4).build());
+        registrar.register(name, baseBlock);
+        registrar.register(name, new BaseBlockItem(baseBlock, new Item.Settings()));
     }
 
     @Override
@@ -76,9 +86,9 @@ public class OpenIndustry implements Addon {
             service.add(COPPER, METAL);
             service.add(TIN, METAL);
             service.add(LEAD, METAL);
-            service.add(BRONZE, METAL);
-            service.add(STEEL, METAL);
-            service.add(SILVER, METAL);
+            service.add(BRONZE, METAL_NO_ORE);
+            service.add(STEEL, METAL_NO_ORE);
+            service.add(SILVER, METAL_NO_ORE);
             service.add(GOLD, PLATE, DENSE_PLATE, DUST, SMALL_DUST, CASING);
             service.add(IRON, PLATE, DENSE_PLATE, DUST, SMALL_DUST, CASING);
             service.add(LAPIS, PLATE, DENSE_PLATE, DUST, SMALL_DUST);
@@ -109,6 +119,12 @@ public class OpenIndustry implements Addon {
         EXTRACTOR = registerMachine(registrar, "extractor", MachineExtractor::new);
         COMPRESSOR = registerMachine(registrar, "compressor", MachineCompressor::new);
         ELECTRIC_FURNACE = registerMachine(registrar, "electric_furnace", MachineElectricFurnace::new);
+
+        registerSimpleBlock(registrar, "marble", Material.STONE);
+        registerSimpleBlock(registrar, "marble_brick", Material.STONE);
+        registerSimpleBlock(registrar, "basalt", Material.STONE);
+        registerSimpleBlock(registrar, "basalt_brick", Material.STONE);
+        registerSimpleBlock(registrar, "basalt_cobblestone", Material.STONE);
         api.getLog().info("Finished Registration");
     }
 }
