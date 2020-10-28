@@ -29,8 +29,9 @@ public abstract class BaseMachineLogic extends BaseBlockEntity implements BlockE
     private int remaining;
     private BlockState cachedState;
 
-    public BaseMachineLogic(BlockEntity.Type<?> type) {
-        super(type);
+
+    public BaseMachineLogic(MachineReference<?> reference) {
+        super(reference.getMachineLogicType());
     }
 
     public BlockState getCachedState() {

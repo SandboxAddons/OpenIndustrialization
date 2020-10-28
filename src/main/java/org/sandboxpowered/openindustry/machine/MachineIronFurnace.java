@@ -4,6 +4,6 @@ import org.sandboxpowered.openindustry.OpenIndustry;
 
 public class MachineIronFurnace extends BaseMachineLogic {
     public MachineIronFurnace() {
-        super(OpenIndustry.IRON_FURNACE.getMachineLogic());
+        super(OpenIndustry.IRON_FURNACE);
     }
 }

@@ -19,34 +19,34 @@ import org.sandboxpowered.api.util.math.Vec3d;
 import org.sandboxpowered.api.util.math.Vec3f;
 import org.sandboxpowered.api.world.World;
 import org.sandboxpowered.api.world.WorldReader;
+import org.sandboxpowered.openindustry.RotationType;
 
 import java.util.function.Supplier;
 
 public class MachineBlock<L extends BaseMachineLogic> extends BaseBlock {
-    public static final Property<Direction> FACING = Properties.HORIZONTAL_FACING;
     public static final Property<Boolean> ACTIVE = BooleanProperty.of("active");
 
-    private final boolean hasRotation;
+    private final RotationType rotationType;
     private final Supplier<L> logicSupplier;
 
-    public MachineBlock(Settings settings, boolean hasRotation, Supplier<L> logicSupplier) {
+    public MachineBlock(Settings settings, RotationType rotationType, Supplier<L> logicSupplier) {
         super(settings);
-        this.hasRotation = hasRotation;
+        this.rotationType = rotationType;
         this.logicSupplier = logicSupplier;
     }
 
     @Override
     protected BlockState createBaseState(BlockState baseState) {
-        if (!hasRotation)
+        if (rotationType == RotationType.NONE)
             return baseState.with(ACTIVE, false);
-        return baseState.with(FACING, Direction.NORTH).with(ACTIVE, false);
+        return baseState.with(rotationType.getProperty(), rotationType.getDefaultValue()).with(ACTIVE, false);
     }
 
     @Override
     public void appendProperties(StateFactory.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
-        if (hasRotation)
-            builder.add(FACING);
+        if (rotationType != RotationType.NONE)
+            builder.add(rotationType.getProperty());
         builder.add(ACTIVE);
     }
 
@@ -61,8 +61,8 @@ public class MachineBlock<L extends BaseMachineLogic> extends BaseBlock {
 
     @Override
     public BlockState getStateForPlacement(WorldReader reader, Position pos, PlayerEntity player, Hand hand, ItemStack stack, Direction side, Vec3d hitPos) {
-        if (hasRotation)
-            return getBaseState().with(FACING, player.getHorizontalFacing().getOppositeDirection());
+        if (rotationType != RotationType.NONE)
+            return getBaseState().with(rotationType.getProperty(), player.getHorizontalFacing().getOppositeDirection());
         return getBaseState();
     }
 

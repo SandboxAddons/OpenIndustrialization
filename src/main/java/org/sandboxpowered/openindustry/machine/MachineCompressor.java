@@ -4,6 +4,6 @@ import org.sandboxpowered.openindustry.OpenIndustry;
 
 public class MachineCompressor extends BaseMachineLogic {
     public MachineCompressor() {
-        super(OpenIndustry.COMPRESSOR.getMachineLogic());
+        super(OpenIndustry.COMPRESSOR);
     }
 }

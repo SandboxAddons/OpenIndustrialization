@@ -4,6 +4,6 @@ import org.sandboxpowered.openindustry.OpenIndustry;
 
 public class MachineElectricFurnace extends BaseElectricMachineLogic {
     public MachineElectricFurnace() {
-        super(OpenIndustry.ELECTRIC_FURNACE.getMachineLogic());
+        super(OpenIndustry.ELECTRIC_FURNACE);
     }
 }

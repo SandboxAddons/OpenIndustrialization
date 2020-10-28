@@ -5,12 +5,12 @@ import org.sandboxpowered.api.item.BaseBlockItem;
 
 public class MachineReference<L extends BaseMachineLogic> {
     private final MachineBlock<L> machine;
-    private final BlockEntity.Type<L> machineLogic;
+    private final BlockEntity.Type<L> machineLogicType;
     private final BaseBlockItem machineItem;
 
-    public MachineReference(MachineBlock<L> machine, BlockEntity.Type<L> machineLogic, BaseBlockItem machineItem) {
+    public MachineReference(MachineBlock<L> machine, BlockEntity.Type<L> machineLogicType, BaseBlockItem machineItem) {
         this.machine = machine;
-        this.machineLogic = machineLogic;
+        this.machineLogicType = machineLogicType;
         this.machineItem = machineItem;
     }
 
@@ -18,8 +18,8 @@ public class MachineReference<L extends BaseMachineLogic> {
         return machine;
     }
 
-    public BlockEntity.Type<L> getMachineLogic() {
-        return machineLogic;
+    public BlockEntity.Type<L> getMachineLogicType() {
+        return machineLogicType;
     }
 
     public BaseBlockItem getMachineItem() {

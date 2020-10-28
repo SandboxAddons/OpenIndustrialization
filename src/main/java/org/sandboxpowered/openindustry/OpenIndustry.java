@@ -28,6 +28,8 @@ public class OpenIndustry implements Addon {
     public static final ResourceMaterial STEEL = ResourceConstants.material("steel");
     public static final ResourceMaterial SILVER = ResourceConstants.material("silver");
     public static final ResourceMaterial IRIDIUM = ResourceConstants.material("iridium");
+    public static final ResourceMaterial RUBY = ResourceConstants.material("ruby");
+    public static final ResourceMaterial SAPPHIRE = ResourceConstants.material("sapphire");
     public static final ResourceType<Item> SMALL_DUST = ResourceConstants.type("small_dust");
     public static final ResourceType<Item> PLATE = ResourceConstants.type("plate");
     public static final ResourceType<Item> CASING = ResourceConstants.type("casing");
@@ -37,6 +39,9 @@ public class OpenIndustry implements Addon {
     };
     public static final ResourceType<?>[] METAL_NO_ORE = new ResourceType<?>[]{
             INGOT, DUST, SMALL_DUST, NUGGET, PLATE, DENSE_PLATE, CASING, BLOCK
+    };
+    public static final ResourceType<?>[] GEM = new ResourceType<?>[]{
+            ResourceConstants.GEM, ORE, BLOCK
     };
     public static MachineReference<MachineIronFurnace> IRON_FURNACE;
     public static MachineReference<MachineExtractor> EXTRACTOR;
@@ -49,11 +54,11 @@ public class OpenIndustry implements Addon {
     public static MachineReference<MachineElectricFurnace> ELECTRIC_FURNACE;
 
     public static <L extends BaseMachineLogic> MachineReference<L> registerMachine(Registrar registrar, String name, Supplier<L> logic) {
-        return registerMachine(registrar, name, true, logic);
+        return registerMachine(registrar, name, RotationType.HORIZONTAL, logic);
     }
 
-    public static <L extends BaseMachineLogic> MachineReference<L> registerMachine(Registrar registrar, String name, boolean hasRotation, Supplier<L> logic) {
-        MachineBlock<L> machine = new MachineBlock<>(Block.Settings.builder(Material.METAL).hasBlockEntity().setStrength(5, 6).build(), hasRotation, logic);
+    public static <L extends BaseMachineLogic> MachineReference<L> registerMachine(Registrar registrar, String name, RotationType rotation, Supplier<L> logic) {
+        MachineBlock<L> machine = new MachineBlock<>(Block.Settings.builder(Material.METAL).hasBlockEntity().setStrength(5, 6).build(), rotation, logic);
         registrar.register(name, machine);
         BlockEntity.Type<L> type = BlockEntity.Type.of(logic, machine);
         registrar.register(name, type);
@@ -89,12 +94,16 @@ public class OpenIndustry implements Addon {
             service.add(BRONZE, METAL_NO_ORE);
             service.add(STEEL, METAL_NO_ORE);
             service.add(SILVER, METAL_NO_ORE);
+
             service.add(GOLD, PLATE, DENSE_PLATE, DUST, SMALL_DUST, CASING);
             service.add(IRON, PLATE, DENSE_PLATE, DUST, SMALL_DUST, CASING);
             service.add(LAPIS, PLATE, DENSE_PLATE, DUST, SMALL_DUST);
             service.add(OBSIDIAN, DUST, PLATE, DENSE_PLATE, SMALL_DUST);
             service.add(COAL, DUST);
             service.add(CLAY, DUST);
+
+            service.add(SAPPHIRE, GEM);
+            service.add(RUBY, GEM);
         });
         api.getLog().info("Registering Materials");
         registerSimpleItem(registrar, "circuit");
@@ -125,6 +134,7 @@ public class OpenIndustry implements Addon {
         registerSimpleBlock(registrar, "basalt", Material.STONE);
         registerSimpleBlock(registrar, "basalt_brick", Material.STONE);
         registerSimpleBlock(registrar, "basalt_cobblestone", Material.STONE);
+
         api.getLog().info("Finished Registration");
     }
 }

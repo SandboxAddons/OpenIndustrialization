@@ -4,6 +4,6 @@ import org.sandboxpowered.openindustry.OpenIndustry;
 
 public class MachineGenerator extends BaseMachineLogic {
     public MachineGenerator() {
-        super(OpenIndustry.GENERATOR.getMachineLogic());
+        super(OpenIndustry.GENERATOR);
     }
 }

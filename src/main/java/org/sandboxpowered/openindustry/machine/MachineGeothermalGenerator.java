@@ -4,6 +4,6 @@ import org.sandboxpowered.openindustry.OpenIndustry;
 
 public class MachineGeothermalGenerator extends BaseMachineLogic {
     public MachineGeothermalGenerator() {
-        super(OpenIndustry.GEOTHERMAL_GENERATOR.getMachineLogic());
+        super(OpenIndustry.GEOTHERMAL_GENERATOR);
     }
 }
